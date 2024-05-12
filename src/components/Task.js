@@ -13,7 +13,7 @@ const Task = ({ task, deleteTask, editTask }) => {
 
   const handleDelete = () => {
     deleteTask(task.id);
-    // Show toast message when task is deleted
+    
     toast.error("Task deleted successfully");
   };
 
@@ -23,9 +23,9 @@ const Task = ({ task, deleteTask, editTask }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    // Check if the status is changing to Completed
+    
     if (name === "status" && value === "Completed") {
-      // Set the flag to indicate that status has changed to Completed
+      
       setStatusChangedToCompleted(true);
     }
     setEditedTask({
@@ -37,20 +37,20 @@ const Task = ({ task, deleteTask, editTask }) => {
   const handleSave = () => {
     editTask(editedTask);
     setIsEditing(false);
-    // If status has changed to Completed, show toast only for that
+    
     if (statusChangedToCompleted) {
       toast.success("Task Completed!!");
     } else {
-      // Show toast message when task is updated, except when status is Completed
+      
       toast.info("Task updated successfully");
     }
-    // Reset the flag after handling the toast
+    
     setStatusChangedToCompleted(false);
   };
 
   return (
-    <div className="grid grid-cols-12 gap-2 items-center justify-center p-5 text-center mb-4 rounded-md shadow-lg bg-slate-200">
-      <div className="col-span-2">
+    <div className="grid grid-cols-12 gap-2 items-center justify-center p-5 text-start sm:text-center mb-4 rounded-md shadow-lg bg-slate-200">
+      <div className="col-span-6 font-semibold sm:font-normal sm:col-span-2">
         {isEditing ? (
           <input
             type="text"
@@ -63,48 +63,7 @@ const Task = ({ task, deleteTask, editTask }) => {
           task.title
         )}
       </div>
-      <div className="col-span-2 ">
-        {isEditing ? (
-          <input
-            name="description"
-            value={editedTask.description}
-            onChange={handleChange}
-            className="p-2 rounded-md w-full "
-          />
-        ) : (
-          task.description
-        )}
-      </div>
-      <div className="col-span-2">
-        {isEditing ? (
-          <input
-            type="date"
-            name="dueDate"
-            value={editedTask.dueDate}
-            onChange={handleChange}
-            className="p-2 rounded-md w-full"
-          />
-        ) : (
-          task.dueDate
-        )}
-      </div>
-      <div className="col-span-2">
-        {isEditing ? (
-          <select
-            name="priority"
-            value={editedTask.priority}
-            onChange={handleChange}
-            className="p-2 rounded-md w-full bg-white"
-          >
-            <option value="Low">Low</option>
-            <option value="Medium">Medium</option>
-            <option value="High">High</option>
-          </select>
-        ) : (
-          task.priority
-        )}
-      </div>
-      <div className="col-span-2">
+      <div className="col-span-6 text-end sm:text-center sm:hidden">
         {isEditing ? (
           <select
             name="status"
@@ -120,9 +79,9 @@ const Task = ({ task, deleteTask, editTask }) => {
           <span
             className={`${
               task.status === "Pending"
-                ? "text-violet-600  font-bold rounded-md py-2 px-4"
+                ? "text-red-500  font-bold"
                 : task.status === "In Progress"
-                ? "text-pink-600  font-bold rounded-md py-2 px-4"
+                ? "text-orange-500  font-bold"
                 : ""
             }`}
           >
@@ -130,9 +89,82 @@ const Task = ({ task, deleteTask, editTask }) => {
           </span>
         )}
       </div>
-      <div className="col-span-2">
+      <div className="col-span-12 sm:col-span-2">
         {isEditing ? (
-          <div className="flex gap-2 justify-center text-lg">
+          <input
+            name="description"
+            value={editedTask.description}
+            onChange={handleChange}
+            className="p-2 rounded-md w-full"
+          />
+        ) : (
+          task.description
+        )}
+      </div>
+      <div className="col-span-12 sm:col-span-2">
+        {isEditing ? (
+          <input
+            type="date"
+            name="dueDate"
+            value={editedTask.dueDate}
+            onChange={handleChange}
+            className="p-2 rounded-md w-full"
+          />
+        ) : (
+          <div>
+            <span className="font-semibold sm:hidden ">Due Date:</span>{" "}
+            {task.dueDate}
+          </div>
+        )}
+      </div>
+      <div className="col-span-12 sm:col-span-2">
+        {isEditing ? (
+          <select
+            name="priority"
+            value={editedTask.priority}
+            onChange={handleChange}
+            className="p-2 rounded-md w-full bg-white"
+          >
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+          </select>
+        ) : (
+          <div>
+            <span className="font-semibold sm:hidden ">Priority:</span>{" "}
+            {task.priority}
+          </div>
+        )}
+      </div>
+      <div className="hidden sm:block sm:col-span-2">
+        {isEditing ? (
+          <select
+            name="status"
+            value={editedTask.status}
+            onChange={handleChange}
+            className="p-2 rounded-md w-full bg-white"
+          >
+            <option value="Pending">Pending</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Completed">Completed</option>
+          </select>
+        ) : (
+          <span
+            className={`${
+              task.status === "Pending"
+                ? "text-violet-600  font-bold"
+                : task.status === "In Progress"
+                ? "text-pink-600  font-bold"
+                : ""
+            }`}
+          >
+            {task.status}
+          </span>
+        )}
+      </div>
+      <div className="col-span-12 sm:col-span-2">
+        {isEditing ? (
+          <div className="flex gap-2 justify-end sm:justify-center text-lg">
             <button
               onClick={handleSave}
               className="p-2 rounded-md hover:text-green-700 text-xl"
@@ -147,7 +179,7 @@ const Task = ({ task, deleteTask, editTask }) => {
             </button>
           </div>
         ) : (
-          <div className="flex gap-1 justify-center">
+          <div className="flex gap-1 justify-end sm:justify-center items-center text-center">
             <button
               className="p-2 rounded-md  hover:text-yellow-600 text-xl"
               onClick={handleEdit}

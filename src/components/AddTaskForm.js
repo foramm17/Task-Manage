@@ -7,7 +7,7 @@ const AddTaskForm = ({ addTask }) => {
   const [newTask, setNewTask] = useState({
     title: "",
     description: "",
-    dueDate: null, // Set default value to null
+    dueDate: null,
     priority: "",
     status: "",
   });
@@ -21,10 +21,10 @@ const AddTaskForm = ({ addTask }) => {
       [name]: value,
     });
 
-    // Clear the error message for the current input field
+
     setErrors({
       ...errors,
-      [name]: "", // Clear error for the current input field
+      [name]: "",
     });
   };
 
@@ -34,7 +34,7 @@ const AddTaskForm = ({ addTask }) => {
     try {
       await userSchema.validate(newTask, { abortEarly: false });
 
-      // Check if any field is empty
+
       if (
         newTask.title &&
         newTask.description &&
@@ -42,7 +42,7 @@ const AddTaskForm = ({ addTask }) => {
         newTask.priority &&
         newTask.status
       ) {
-        // If all fields are filled, proceed with adding the task
+
         addTask({ ...newTask, id: Date.now() });
         setNewTask({
           title: "",
@@ -51,11 +51,11 @@ const AddTaskForm = ({ addTask }) => {
           priority: "",
           status: "",
         });
-        // Show success message after adding the task
+
         toast.success("Task added successfully!");
       }
     } catch (error) {
-      // If there are validation errors, set them in the state
+
       const validationErrors = {};
       error.inner.forEach((err) => {
         validationErrors[err.path] = err.message;
@@ -70,7 +70,7 @@ const AddTaskForm = ({ addTask }) => {
         onSubmit={handleSubmit}
         className="grid grid-cols-12 gap-2 items-start pb-4 justify-center text-center"
       >
-        <div className="col-span-2 flex flex-col items-start">
+        <div className="col-span-12 sm:col-span-2 flex flex-col items-start">
           <input
             type="text"
             name="title"
@@ -81,7 +81,7 @@ const AddTaskForm = ({ addTask }) => {
           />
           {errors.title && <p className="text-red-500">{errors.title}</p>}
         </div>
-        <div className="col-span-2 flex flex-col items-start">
+        <div className="col-span-12 sm:col-span-2 flex flex-col items-start">
           <input
             name="description"
             placeholder="Description"
@@ -93,7 +93,7 @@ const AddTaskForm = ({ addTask }) => {
             <p className="text-red-500">{errors.description}</p>
           )}
         </div>
-        <div className="col-span-2 flex flex-col items-start">
+        <div className="col-span-12 sm:col-span-2 flex flex-col items-start">
           <input
             type="date"
             name="dueDate"
@@ -103,7 +103,7 @@ const AddTaskForm = ({ addTask }) => {
           />
           {errors.dueDate && <p className="text-red-500">{errors.dueDate}</p>}
         </div>
-        <div className="col-span-2 flex flex-col items-start">
+        <div className="col-span-12 sm:col-span-2 flex flex-col items-start">
           <select
             name="priority"
             value={newTask.priority}
@@ -117,7 +117,7 @@ const AddTaskForm = ({ addTask }) => {
           </select>
           {errors.priority && <p className="text-red-500">{errors.priority}</p>}
         </div>
-        <div className="col-span-2 flex flex-col items-start">
+        <div className="col-span-12 sm:col-span-2 flex flex-col items-start">
           <select
             name="status"
             value={newTask.status}
@@ -130,7 +130,7 @@ const AddTaskForm = ({ addTask }) => {
           </select>
           {errors.status && <p className="text-red-500">{errors.status}</p>}
         </div>
-        <div className="col-span-2 flex justify-end">
+        <div className="col-span-12 sm:col-span-2 flex justify-end">
           <button
             type="submit"
             className=" p-2 w-full rounded-md font-semibold text-white bg-sky-800"

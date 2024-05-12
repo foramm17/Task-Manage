@@ -44,7 +44,7 @@ const TaskList = ({ deleteTask, editTask, tasks, showCompletedTasks }) => {
         return sortDirection === "asc" ? statusA - statusB : statusB - statusA;
       });
     } else {
-      // Return unsorted tasks if sortBy doesn't match any expected value
+      
       return filtered.slice();
     }
   };
@@ -52,7 +52,7 @@ const TaskList = ({ deleteTask, editTask, tasks, showCompletedTasks }) => {
   return (
     <div className="bg-slate-100 rounded-md p-4">
       <h2 className="text-center text-lg font-bold mb-2 underline">TODOs</h2>
-      <div className="grid grid-cols-12 font-bold gap-2 items-center justify-center p-5 text-center">
+      <div className="hidden sm:grid grid-cols-12 font-bold gap-2 items-center justify-center p-5 text-center">
         <div className="col-span-2">Title</div>
         <div className="col-span-2">Description</div>
         <div
@@ -94,7 +94,7 @@ const TaskList = ({ deleteTask, editTask, tasks, showCompletedTasks }) => {
         <div className="col-span-2">Actions</div>
       </div>
 
-      <div className="overflow-y-scroll max-h-96"> {/* Adjust max height as needed */}
+      <div className="overflow-scroll max-h-96"> 
         {sortedTasks().map((task) => (
           <div key={task.id}>
             <Task
