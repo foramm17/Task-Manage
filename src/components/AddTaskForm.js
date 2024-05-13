@@ -81,7 +81,7 @@ const AddTaskForm = ({ addTask }) => {
           />
           {errors.title && <p className="text-red-500">{errors.title}</p>}
         </div>
-        <div className="col-span-12 sm:col-span-2 flex flex-col items-start">
+        <div className="col-span-12 sm:col-span-2 flex flex-col items-start truncate">
           <input
             name="description"
             placeholder="Description"

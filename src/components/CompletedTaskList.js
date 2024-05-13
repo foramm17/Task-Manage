@@ -38,7 +38,7 @@ const CompletedTaskList = ({ completedTasks, deleteTask }) => {
                 {task.status}
               </div>
 
-              <div className="col-span-12  sm:col-span-2">
+              <div className="col-span-12 sm:col-span-2 break-words">
                 {task.description}
               </div>
               <div className="col-span-12 sm:col-span-2">

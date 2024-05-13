@@ -98,7 +98,7 @@ const Task = ({ task, deleteTask, editTask }) => {
             className="p-2 rounded-md w-full"
           />
         ) : (
-          task.description
+          <div className="break-words">{task.description}</div>
         )}
       </div>
       <div className="col-span-12 sm:col-span-2">

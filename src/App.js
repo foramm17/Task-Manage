@@ -101,13 +101,13 @@ const App = () => {
             Completed
           </button>
         </div>
-        <div className="flex gap-4">
-          <div className="flex items-center relative">
+        <div className="flex justify-between sm:justify-end gap-4 ">
+          <div className="flex w-1/2 sm:w-full items-center relative">
             <input
               type="text"
               id="searchInput"
               placeholder="Search task..."
-              className="p-2 rounded-md"
+              className="p-2 w-full rounded-md"
               onChange={(e) => handleSearch(e.target.value)}
             />
             <IoSearch className="absolute right-3 text-slate-400" />
